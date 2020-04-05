@@ -1,0 +1,18 @@
+server:
+  port: 9004
+
+spring:
+  application:
+    name: nacos-cloud-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        # 虚拟机上的linux里面的nacos
+        # server-addr: 192.168.109.134:1111
+        # 配置nacos地址
+        server-addr: localhost:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

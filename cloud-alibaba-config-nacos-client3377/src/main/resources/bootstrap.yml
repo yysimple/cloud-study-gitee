@@ -1,0 +1,26 @@
+server:
+  port: 3377
+
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        # 配置nacos地址
+        server-addr: localhost:8848
+      config:
+        # 配置中心的地址
+        server-addr: localhost:8848
+        # 指定配置文件格式，相当于gitee上的那个文件
+        file-extension: yaml
+        # 分组
+        group: DEV_GROUP
+        # 命名空间
+        namespace: 4aca4479-cf8e-4ce2-b00d-9742e225a386
+
+# 消费者将去访问微服务的名称
+service-url:
+  nacos-user-service: http://nacos-cloud-payment-provider
+
+# ${prefix}-${spring.profile.active}.${file-extension}
