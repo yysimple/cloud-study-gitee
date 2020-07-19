@@ -19,7 +19,7 @@ public class GatewayRouterConfig {
         RouteLocatorBuilder.Builder routes = builder.routes();
         // 进行路由转发
         routes.route("path-baidu-guonei", r -> r.path("/guonei").uri("http://news.baidu.com/guonei")).build();
-        routes.route("path-baidu-guoji", r -> r.path("/guoji").uri("http://news.baidu.com/guoji")).build();
+        //routes.route("path-baidu-guoji", r -> r.path("/guoji").uri("http://news.baidu.com/guoji")).build();
         return routes.build();
     }
 }

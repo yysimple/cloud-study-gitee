@@ -32,7 +32,7 @@ public class PaymentController {
     private DiscoveryClient discoveryClient;
 
     @PostMapping("/payment/create")
-    public CommentResult create(@RequestBody Payment payment){
+    public CommentResult create(@RequestBody Payment payment) {
         int result = paymentService.create(payment);
         log.info("****RESULT****: {}", result);
         if (result > 0) {
@@ -43,25 +43,25 @@ public class PaymentController {
     }
 
     @GetMapping("/payment/getPaymentById")
-    public CommentResult getPaymentById(@RequestParam("id") Long id){
+    public CommentResult getPaymentById(@RequestParam("id") Long id) {
         log.info("id: {}", id);
         Payment payment = paymentService.getPaymentById(id);
         log.info("****RESULT****: {}", payment);
         if (payment != null) {
-            return new CommentResult(200, "success port: " +  serverPort, payment);
+            return new CommentResult(200, "success port: " + serverPort, payment);
         } else {
             return new CommentResult(444, "fail, search id: " + id, null);
         }
     }
 
     @GetMapping("/payment/discovery")
-    public Object getDiscovery(){
+    public Object getDiscovery() {
         List<String> services = discoveryClient.getServices();
         for (String service : services) {
             log.info("**** service: " + service);
         }
 
-        List<ServiceInstance> serviceInstances =  discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
         for (ServiceInstance serviceInstance : serviceInstances) {
             log.info(serviceInstance.getInstanceId() + "\t" + serviceInstance.getHost() + "\t" + serviceInstance.getUri());
         }
@@ -70,12 +70,17 @@ public class PaymentController {
     }
 
     @GetMapping("/payment/lb")
-    public String getPaymentLB(){
+    public String getPaymentLB() {
         return serverPort;
     }
 
     @GetMapping("/payment/zipkin")
     public String paymentZipKin() {
         return "wo shi ZipKin, welcome to you!!! O(∩_∩)O哈哈~";
+    }
+
+    @GetMapping("/lb")
+    public String lb() {
+        return "测试StripPrefix=1";
     }
 }

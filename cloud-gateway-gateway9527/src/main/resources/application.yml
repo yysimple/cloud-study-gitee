@@ -17,8 +17,11 @@ spring:
           # 匹配后提供服务的路由地址
           uri: http://localhost:8001
           # 断言，路径匹配的进行路由，如果路径在对应的微服务里真的存在，返回就是true、就可以进行路由转发
+          # http://localhost:8001/payment/getPaymentById/1 就可以 使用  http://localhost:9527/payment/getPaymentById/1 进行访问
           predicates:
             - Path=/payment/getPaymentById/**
+          filter:
+            - StripPrefix=1
 
         - id: payment_routh02
           # uri: http://localhost:8001
@@ -26,6 +29,9 @@ spring:
           uri: lb://cloud-payment-service
           predicates:
             - Path=/payment/lb/**
+          # 去除前一个节点 127.0.0.1:9527/lb, 没有就会报错
+          filter:
+            - StripPrefix=1
             # 配置在什么时候可以访问这个接口 还有 before between
             #- After=2020-03-19T18:02:38.387+08:00[Asia/Shanghai]
             # 配置Cookie curl http://localhost:9527/payment/lb --cookie "username=wcx" 需要带上cookie访问

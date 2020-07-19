@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 public class OrderZkController {
 
     public static final String INVOKE_URL = "http://zookeeper-cloud-provider-payment";
-
     @Autowired
     private RestTemplate restTemplate;
 
